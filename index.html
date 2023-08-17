@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content='width=device-width, height=device-height, initial-scale=1.0, minimum-scale=1.0, user-scalable=no, shrink-to-fit=yes'>
-    <title>Unity WebGL Player | hk2</title>
+    <title>Unity WebGL Player | hochkultur2</title>
     <link rel="stylesheet" href="TemplateData/style.css">
     <style>
         html{
@@ -34,7 +34,7 @@
 </head>
 <body>
     <!--IMAGETARGETS-->
-		<imagetarget id='ImageTarget' src='targets/Tracker.jpg'></imagetarget>
+		<imagetarget id='hochkultur2-BondTruluv' src='targets/hochkultur2-BondTruluv.jpg'></imagetarget>
 
     <video id="webcam-video" muted autoplay playsinline style="width:1px;position:absolute"></video>
     <div id="startARDiv" class="ctaDiv">
@@ -46,6 +46,15 @@
         <div style="position:relative; background-color:white; padding:10px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.3), 0 6px 20px 0 rgba(0, 0, 0, 0.25);">
             <img id="screenshotImg" src="" alt="screenshot" style="width:80vw; height:80vh">
             <button onclick="document.getElementById('screenshotDiv').style.display = 'none';" style="position:absolute; transform:translateY(-100%); right:0; top:0">Close</button>
+        </div>
+    </div>
+    <div id="confirmUrlDiv" style="display: none;" class="ctaDiv">
+        <div style="position:relative; background-color:white; padding:10px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.3), 0 6px 20px 0 rgba(0, 0, 0, 0.25); width: 80vw; display:flex; flex-direction: column; align-items: center;">
+            <p id="confirmUrlText" style="text-align: center; width:80%; overflow: hidden; text-overflow: ellipsis;">Are you sure you want to visit url.com?</p>
+            <div>
+                <button onclick="window.open(newUrlString, '_blank').focus(); document.getElementById('confirmUrlDiv').style.display = 'none'">VISIT SITE</button>
+                <button onclick="document.getElementById('confirmUrlDiv').style.display = 'none'">GO BACK</button>
+            </div>
         </div>
     </div>
     <!-- ENABLE THIS FOR WECHAT -->
@@ -82,7 +91,7 @@
         });;
         
     </script>
-    <script src="Build/build3-ar-experience-hochkultur2.loader.js"></script>
+    <script src="Build/build1.loader.js"></script>
     <script>
             var container = document.querySelector("#unity-container");
             var canvas = document.querySelector("#unity-canvas");
@@ -94,12 +103,12 @@
                 
                 document.getElementById("startARDiv").style.display = "none";
                 createUnityInstance(document.querySelector("#unity-canvas"), {
-                    dataUrl: "Build/build3-ar-experience-hochkultur2.data.gz",
-                    frameworkUrl: "Build/build3-ar-experience-hochkultur2.framework.js.gz",
-                    codeUrl: "Build/build3-ar-experience-hochkultur2.wasm.gz",
+                    dataUrl: "Build/build1.data.gz",
+                    frameworkUrl: "Build/build1.framework.js.gz",
+                    codeUrl: "Build/build1.wasm.gz",
                     streamingAssetsUrl: "StreamingAssets",
                     companyName: "DefaultCompany",
-                    productName: "hk2",
+                    productName: "hochkultur2",
                     productVersion: "0.1",
                     //webglContextAttributes: { "preserveDrawingBuffer": true },
                     // matchWebGLToCanvasSize: false, // Uncomment this to separately control WebGL canvas render size and DOM element size.
@@ -199,6 +208,11 @@
                 document.getElementById("screenshotImg").src = dataUrl;
                 document.getElementById("screenshotImg").style.width = "80vw";
                 document.getElementById("screenshotImg").style.height = 80 / window.innerWidth * window.innerHeight + "vw";
+            }
+            function ShowConfirmUrl(url){
+                document.getElementById("confirmUrlDiv").style.display = "flex";
+                window.newUrlString = url;
+                document.getElementById("confirmUrlText").innerText = "Are you sure you want to visit " + url;                
             }
             
             //ENABLE THIS FOR WECHAT
